@@ -146,7 +146,7 @@ static bool DoStateVersion(PointerWrap& p, std::string* version_created_by)
   return true;
 }
 
-static std::string DoState(PointerWrap& p)
+std::string DoState(PointerWrap& p)
 {
   std::string version_created_by;
   if (!DoStateVersion(p, &version_created_by))
