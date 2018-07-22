@@ -149,6 +149,11 @@ void ExitGpuLoop()
   s_gpu_mainloop.Stop(s_gpu_mainloop.kNonBlock);
 }
 
+void StopGpuLoop()
+{
+  s_gpu_mainloop.Stop(s_gpu_mainloop.kNonBlock);
+}
+
 void EmulatorState(bool running)
 {
   s_emu_running_state.Set(running);
@@ -588,4 +593,4 @@ void Prepare()
   s_event_sync_gpu = CoreTiming::RegisterEvent("SyncGPUCallback", SyncGPUCallback);
   s_syncing_suspended = true;
 }
-}
+} // namespace Fifo
