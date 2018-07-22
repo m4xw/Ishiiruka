@@ -104,6 +104,7 @@ public:
     m_window_rectangle.bottom = bottom;
   }
   float CalculateDrawAspectRatio(u32 target_width, u32 target_height) const;
+  bool IsWideScreen() const { return m_aspect_wide; }
   std::tuple<float, float> ScaleToDisplayAspectRatio(u32 width, u32 height) const;
   TargetRectangle CalculateFrameDumpDrawRectangle();
   void UpdateDrawRectangle();
