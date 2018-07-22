@@ -92,7 +92,7 @@ static bool ShouldEnableDebugReports(bool enable_validation_layers)
 
 bool VideoBackend::Initialize(void* window_handle)
 {
-  if (!LoadVulkanLibrary())
+  if (!g_vulkan_context)
   {
     PanicAlert("Failed to load Vulkan library.");
     return false;
@@ -186,9 +186,9 @@ bool VideoBackend::Initialize(void* window_handle)
 
   // Create swap chain. This has to be done early so that the target size is correct for auto-scale.
   std::unique_ptr<SwapChain> swap_chain;
-  if (surface != VK_NULL_HANDLE)
+  if (g_vulkan_context->GetSurface() != VK_NULL_HANDLE)
   {
-    swap_chain = SwapChain::Create(window_handle, surface, g_Config.IsVSync());
+    swap_chain = SwapChain::Create(window_handle, g_vulkan_context->GetSurface(), g_Config.IsVSync());
     if (!swap_chain)
     {
       PanicAlert("Failed to create Vulkan swap chain.");
