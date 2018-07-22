@@ -659,7 +659,8 @@ HRESULT SetFullscreenState(bool enable_fullscreen)
 bool GetFullscreenState()
 {
   BOOL state = FALSE;
-  swapchain->GetFullscreenState(&state, nullptr);
+  if (swapchain)
+    swapchain->GetFullscreenState(&state, nullptr);
   return !!state;
 }
 
