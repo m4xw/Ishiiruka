@@ -109,7 +109,6 @@ public:
 
   void CheckInvalidState();
 
-protected:
   void InitializeShared();
   void ShutdownShared();
   void CleanupShared();
@@ -122,6 +121,10 @@ protected:
   u32 m_EFB_PCache_Divisor;
   u32 m_EFB_PCache_Life;
   EFBPeekCacheElement* m_EFB_PCache;
+
+protected:
+   bool m_initialized = false;
+   bool m_invalid = false;
 };
 
 extern std::vector<std::unique_ptr<VideoBackendBase>> g_available_video_backends;

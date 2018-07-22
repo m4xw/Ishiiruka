@@ -190,6 +190,12 @@ u16 VideoBackendBase::Video_GetBoundingBox(int index)
 
 void VideoBackendBase::InitializeShared()
 {
+  if (m_initialized)
+  {
+    VertexLoaderManager::Init();
+    return;
+  }
+
   memset(&g_main_cp_state, 0, sizeof(g_main_cp_state));
   memset(texMem, 0, TMEM_SIZE);
   s_FifoShuttingDown.Clear();
@@ -230,6 +236,13 @@ void VideoBackendBase::InitializeShared()
 
 void VideoBackendBase::ShutdownShared()
 {
+   if(Core::IsRunning())
+   {
+      VertexLoaderManager::Clear();
+      m_invalid = true;
+      return;
+   }
+
   // Do our OSD callbacks
   OSD::DoCallbacks(OSD::CallbackType::Shutdown);
 
