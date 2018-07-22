@@ -12,3 +12,7 @@ add_subdirectory(VideoBackends)
 if(ENABLE_QT2)
 	add_subdirectory(DolphinQt2)
 endif()
+
+if(LIBRETRO)
+  add_subdirectory(DolphinLibretro)
+endif()

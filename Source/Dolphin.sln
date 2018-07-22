@@ -157,6 +157,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ed25519", "..\externals\ed2
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Updater", "Core\Updater\Updater.vcxproj", "{E4BECBAB-9C6E-41AB-BB56-F9D70AB6BE03}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Libretro", "Core\DolphinLibretro\DolphinLibretro.vcxproj", "{8DCFA10F-2CAC-45A6-88A1-6B0D24C27EE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -323,6 +325,10 @@ Global
 		{E4BECBAB-9C6E-41AB-BB56-F9D70AB6BE03}.Debug|x64.Build.0 = Debug|x64
 		{E4BECBAB-9C6E-41AB-BB56-F9D70AB6BE03}.Release|x64.ActiveCfg = Release|x64
 		{E4BECBAB-9C6E-41AB-BB56-F9D70AB6BE03}.Release|x64.Build.0 = Release|x64
+      {8DCFA10F-2CAC-45A6-88A1-6B0D24C27EE9}.Debug|x64.ActiveCfg = Debug|x64
+		{8DCFA10F-2CAC-45A6-88A1-6B0D24C27EE9}.Debug|x64.Build.0 = Debug|x64
+		{8DCFA10F-2CAC-45A6-88A1-6B0D24C27EE9}.Release|x64.ActiveCfg = Release|x64
+		{8DCFA10F-2CAC-45A6-88A1-6B0D24C27EE9}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
