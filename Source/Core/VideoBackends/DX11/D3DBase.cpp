@@ -43,7 +43,7 @@ ID3D11Device1* device1 = nullptr;
 ID3D11DeviceContext* context;
 ID3D11DeviceContext1* context1;
 IDXGISwapChain* swapchain = nullptr;
-D3D_FEATURE_LEVEL featlevel;
+D3D_FEATURE_LEVEL featlevel = D3D_FEATURE_LEVEL_10_0;
 bool partial_buffer_update_supported = false;
 D3DTexture2D* backbuf = nullptr;
 HWND hWnd;

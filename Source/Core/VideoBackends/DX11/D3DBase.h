@@ -41,6 +41,7 @@ extern ID3D11Device* device;
 extern ID3D11Device1* device1;
 extern ID3D11DeviceContext* context;
 extern ID3D11DeviceContext1* context1;
+extern D3D_FEATURE_LEVEL featlevel;
 extern HWND hWnd;
 extern bool bFrameInProgress;
 
