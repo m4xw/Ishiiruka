@@ -765,7 +765,7 @@ void Close()
       {
         // print out alive objects, but only if we actually have pending references
         // note this will also print out internal live objects to the debug console
-        s_debug_device->ReportLiveDeviceObjects(D3D12_RLDO_DETAIL);
+        s_debug_device->ReportLiveDeviceObjects((D3D12_RLDO_FLAGS)D3D12_RLDO_DETAIL);
       }
       s_debug_device.Reset();
     }

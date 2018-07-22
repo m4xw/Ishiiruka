@@ -19,7 +19,7 @@ std::unique_ptr<NativeVertexFormat> VertexManager::CreateNativeVertexFormat(cons
   return std::make_unique<D3DVertexFormat>(vtx_decl);
 }
 
-DXGI_FORMAT VarToD3D(EVTXComponentFormat t, int size)
+static DXGI_FORMAT VarToD3D(EVTXComponentFormat t, int size)
 {
   DXGI_FORMAT retval = DXGI_FORMAT_UNKNOWN;
   static const constexpr DXGI_FORMAT lookup[4][5] =

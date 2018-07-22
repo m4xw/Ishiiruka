@@ -462,7 +462,7 @@ if(USE_X11)
 endif()
 
 if(ENCODE_FRAMEDUMPS)
-  if(WIN32)
+   if(MSVC)
     set(FFMPEG_DIR Externals/ffmpeg)
   endif()
   find_package(FFmpeg COMPONENTS avcodec avformat avutil swscale)

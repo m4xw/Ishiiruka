@@ -14,7 +14,7 @@
 #include "Common/SysConf.h"
 #include "Core/ConfigManager.h"
 #include "Core/Movie.h"
-#include "Core/NetPlayClient.h"
+#include "Core/NetPlayProto.h"
 
 namespace Core
 {
