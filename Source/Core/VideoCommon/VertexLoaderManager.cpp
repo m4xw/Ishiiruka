@@ -94,6 +94,12 @@ void Init()
   last_game_code = SConfig::GetInstance().GetGameID();
 }
 
+void Clear()
+{
+  s_vertex_loader_map.clear();
+  s_native_vertex_map.clear();
+}
+
 void Shutdown()
 {
   s_vertex_loader_map.clear();

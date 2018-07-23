@@ -15,6 +15,7 @@ using NativeVertexFormatMap = std::map<PortableVertexDeclaration, std::unique_pt
 
 void Init();
 void Shutdown();
+void Clear();
 
 void MarkAllDirty();
 
