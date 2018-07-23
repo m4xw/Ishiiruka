@@ -10,7 +10,7 @@
 #ifdef _WIN32
 #define HAVE_D3D11
 #include <libretro_d3d.h>
-#include "VideoBackends/D3D/D3DState.h"
+#include "VideoBackends/DX11/D3DState.h"
 #endif
 #ifndef __APPLE__
 #include <libretro_vulkan.h>
@@ -24,7 +24,7 @@
 #include "Core/Core.h"
 #include "Core/Host.h"
 #include "DolphinLibretro/Options.h"
-#include "VideoBackends/Null/Render.h"
+//#include "VideoBackends/Null/Render.h"
 #include "VideoCommon/AsyncRequests.h"
 #include "VideoCommon/Fifo.h"
 #include "VideoCommon/RenderBase.h"

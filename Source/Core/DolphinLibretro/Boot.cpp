@@ -17,7 +17,7 @@
 #include "DolphinLibretro/Options.h"
 #include "DolphinLibretro/Video.h"
 #include "InputCommon/ControllerInterface/ControllerInterface.h"
-#include "UICommon/DiscordPresence.h"
+//#include "UICommon/DiscordPresence.h"
 #include "UICommon/UICommon.h"
 #include "VideoCommon/AsyncRequests.h"
 #include "VideoCommon/VideoBackendBase.h"
