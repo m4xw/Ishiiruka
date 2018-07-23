@@ -647,7 +647,9 @@ void EmuThread()
       s_emu_thread_scope_guards.push_back(std::move(video_guard));
       s_emu_thread_scope_guards.push_back(std::move(controller_guard));
       s_emu_thread_scope_guards.push_back(std::move(audio_guard));
+#if 0
       s_emu_thread_scope_guards.push_back(std::move(wiifs_guard));
+#endif
       return;
     }
 

@@ -2,7 +2,7 @@
 #pragma once
 
 #include <libretro.h>
-#include "VideoBackends/Null/Render.h"
+//#include "VideoBackends/Null/Render.h"
 #include "VideoBackends/Software/SWRenderer.h"
 #include "VideoBackends/Software/SWTexture.h"
 #include "VideoCommon/VideoConfig.h"

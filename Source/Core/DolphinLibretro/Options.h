@@ -73,6 +73,6 @@ extern Option<bool> prograssiveScan;
 extern Option<bool> pal60;
 extern Option<u32> sensorBarPosition;
 extern Option<unsigned int> audioMixerRate;
-extern Option<ShaderCompilationMode> shaderCompilationMode;
+//extern Option<ShaderCompilationMode> shaderCompilationMode;
 }  // namespace Options
 }  // namespace Libretro

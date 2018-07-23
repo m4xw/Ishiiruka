@@ -22,9 +22,9 @@ void Host_RefreshDSPDebuggerWindow()
 {
 }
 
-void Host_Message(HostMessageID id)
+void Host_Message(int id)
 {
-  DEBUG_LOG(COMMON, "message id: %i\n", (int)id);
+  DEBUG_LOG(COMMON, "message id: %i\n", id);
 }
 
 void* Host_GetRenderHandle()
