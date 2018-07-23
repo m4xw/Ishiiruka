@@ -184,12 +184,6 @@ void retro_run(void)
       g_renderer.reset();
       g_renderer = std::make_unique<Libretro::Video::SWRenderer>();
     }
-    else if (SConfig::GetInstance().m_strVideoBackend == "Null")
-    {
-      g_renderer->Shutdown();
-      g_renderer.reset();
-      g_renderer = std::make_unique<Libretro::Video::NullRenderer>();
-    }
 #ifdef _WIN32
     else if (SConfig::GetInstance().m_strVideoBackend == "D3D")
     {
