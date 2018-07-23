@@ -4,6 +4,10 @@
 
 #pragma once
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 #include "Common/Common.h"
 #include "Common/MathUtil.h"
 #include "VideoCommon/VideoBackendBase.h"
