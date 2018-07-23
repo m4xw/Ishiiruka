@@ -176,7 +176,7 @@ Option<std::string> renderer("dolphin_renderer", "Renderer", {"Hardware", "Softw
 Option<bool> fastmem("dolphin_fastmem", "Fastmem", true);
 Option<bool> DSPHLE("dolphin_dsp_hle", "DSP HLE", true);
 Option<bool> DSPEnableJIT("dolphin_dsp_jit", "DSP Enable JIT", true);
-Option<PowerPC::CPUCore> cpu_core("dolphin_cpu_core", "CPU Core",
+Option<int> cpu_core("dolphin_cpu_core", "CPU Core",
                                   {
 #ifdef _M_X86
                                       {"JIT64", PowerPC::CPUCore::CORE_JIT64},

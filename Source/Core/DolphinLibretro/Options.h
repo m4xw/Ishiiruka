@@ -65,7 +65,7 @@ extern Option<std::string> renderer;
 extern Option<bool> fastmem;
 extern Option<bool> DSPHLE;
 extern Option<bool> DSPEnableJIT;
-extern Option<PowerPC::CPUCore> cpu_core;
+extern Option<int> cpu_core;
 extern Option<DiscIO::Language> Language;
 extern Option<bool> Widescreen;
 extern Option<bool> WidescreenHack;
