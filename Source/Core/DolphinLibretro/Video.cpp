@@ -24,7 +24,6 @@
 #include "Core/Core.h"
 #include "Core/Host.h"
 #include "DolphinLibretro/Options.h"
-//#include "VideoBackends/Null/Render.h"
 #include "VideoCommon/AsyncRequests.h"
 #include "VideoCommon/Fifo.h"
 #include "VideoCommon/RenderBase.h"
@@ -103,7 +102,9 @@ static void ContextReset(void)
     d3d->device->CheckFormatSupport(DXGI_FORMAT_BC3_UNORM, &bc3_support);
     g_Config.backend_info.bSupportsST3CTextures =
         (bc1_support & bc2_support & bc3_support) & D3D11_FORMAT_SUPPORT_TEXTURE2D;
+#if 0
     g_Config.backend_info.bSupportsBPTCTextures = bc7_support & D3D11_FORMAT_SUPPORT_TEXTURE2D;
+#endif
   }
 #endif
 
@@ -270,8 +271,6 @@ void Init()
   hw_render.context_type = RETRO_HW_CONTEXT_NONE;
   if (Options::renderer == "Software")
     SConfig::GetInstance().m_strVideoBackend = "Software Renderer";
-  else
-    SConfig::GetInstance().m_strVideoBackend = "Null";
 }
 
 }  // namespace Video
