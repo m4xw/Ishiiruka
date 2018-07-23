@@ -91,6 +91,7 @@ bool retro_load_game(const struct retro_game_info* game)
   SConfig::GetInstance().m_audio_stretch = false;
 
   Config::SetBase(Config::SYSCONF_LANGUAGE, (u32)(DiscIO::Language)Libretro::Options::Language);
+#if 0
   Config::SetBase(Config::SYSCONF_WIDESCREEN, Libretro::Options::Widescreen);
   Config::SetBase(Config::SYSCONF_PROGRESSIVE_SCAN, Libretro::Options::prograssiveScan);
   Config::SetBase(Config::SYSCONF_PAL60, Libretro::Options::pal60);
@@ -99,12 +100,13 @@ bool retro_load_game(const struct retro_game_info* game)
   Config::SetBase(Config::GFX_WIDESCREEN_HACK, Libretro::Options::WidescreenHack);
   Config::SetBase(Config::GFX_EFB_SCALE, Libretro::Options::efbScale);
   Config::SetBase(Config::GFX_ASPECT_RATIO, AspectMode::Stretch);
+#endif
   Config::SetBase(Config::GFX_BACKEND_MULTITHREADING, false);
 #if 0
   Config::SetBase(Config::GFX_SHADER_COMPILER_THREADS, 1);
   Config::SetBase(Config::GFX_SHADER_PRECOMPILER_THREADS, 1);
-#endif
   Config::SetBase(Config::GFX_SHADER_COMPILATION_MODE, Libretro::Options::shaderCompilationMode);
+#endif
 
   Libretro::Video::Init();
   NOTICE_LOG(VIDEO, "Using GFX backend: %s", SConfig::GetInstance().m_strVideoBackend.c_str());
