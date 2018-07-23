@@ -6,6 +6,7 @@
 #include "VideoBackends/Software/SWRenderer.h"
 #include "VideoBackends/Software/SWTexture.h"
 #include "VideoCommon/VideoConfig.h"
+#include "Core/HW/Memmap.h"
 #ifndef __APPLE__
 #include "VideoBackends/Vulkan/VulkanLoader.h"
 #endif
@@ -46,23 +47,35 @@ void WaitForPresentation();
 class SWRenderer : public ::SWRenderer
 {
 public:
-  void SwapImpl(AbstractTexture* texture, const EFBRectangle& rc, u64 ticks) override
+  void SwapImpl(u32 xfbAddr, u32 fbWidth, u32 fbStride, u32 fbHeight, const EFBRectangle& rc, u64 ticks, float Gamma)
   {
-    SW::SWTexture* sw_image = static_cast<SW::SWTexture*>(texture);
-    video_cb(sw_image->GetData(), rc.GetWidth(), rc.GetHeight(), sw_image->GetWidth() * 4);
-    UpdateActiveConfig();
+     if (g_ActiveConfig.bUseXFB)
+     {
+        EfbInterface::yuv422_packed* xfb = (EfbInterface::yuv422_packed*) Memory::GetPointer(xfbAddr);
+        UpdateColorTexture(xfb, fbWidth, fbHeight);
+     }
+     else
+     {
+        EfbInterface::BypassXFB(GetCurrentColorTexture(), fbWidth, fbHeight, rc, Gamma);
+     }
+
+     video_cb(GetCurrentColorTexture(), fbWidth, fbHeight, fbWidth * 4);
+
+     UpdateActiveConfig();
   }
 };
 
+#if 0
 class NullRenderer : public Null::Renderer
 {
 public:
-  void SwapImpl(AbstractTexture* texture, const EFBRectangle& rc, u64 ticks) override
+  void SwapImpl(u32 xfbAddr, u32 fbWidth, u32 fbStride, u32 fbHeight, const EFBRectangle& rc, u64 ticks, float Gamma)
   {
     video_cb(NULL, 512, 512, 512 * 4);
     UpdateActiveConfig();
   }
 };
+#endif
 #ifdef _WIN32
 class DX11Renderer : public DX11::Renderer
 {

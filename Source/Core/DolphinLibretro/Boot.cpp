@@ -59,7 +59,9 @@ bool retro_load_game(const struct retro_game_info* game)
   UICommon::CreateDirectories();
   UICommon::Init();
   Libretro::Log::Init();
+#if 0
   Discord::SetDiscordPresenceEnabled(false);
+#endif
   SetEnableAlert(false);
 
   INFO_LOG(COMMON, "User Directory set to '%s'", user_dir.c_str());
