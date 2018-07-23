@@ -92,7 +92,9 @@ static void ContextReset(void)
     if (FAILED(d3d->device->QueryInterface<ID3D11Device1>(&DX11::D3D::device1)))
     {
       WARN_LOG(VIDEO, "Missing Direct3D 11.1 support. Logical operations will not be supported.");
+#if 0
       g_Config.backend_info.bSupportsLogicOp = false;
+#endif
     }
     UINT bc1_support, bc2_support, bc3_support, bc7_support;
     d3d->device->CheckFormatSupport(DXGI_FORMAT_BC1_UNORM, &bc1_support);

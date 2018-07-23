@@ -80,9 +80,14 @@ public:
 class DX11Renderer : public DX11::Renderer
 {
 public:
+   /* TODO/FIXME */
+#if 0
   DX11Renderer() : DX11::Renderer(1,1) {}
-  void SwapImpl(AbstractTexture* texture, const EFBRectangle& rc, u64 ticks) override
+#endif
+  void SwapImpl(u32 xfbAddr, u32 fbWidth, u32 fbStride, u32 fbHeight, const EFBRectangle& rc, u64 ticks, float Gamma)
   {
+     /* TODO/FIXME */
+#if 0
     DX11::D3DTexture2D* xfb_texture = static_cast<DX11::DXTexture*>(texture)->GetRawTexIdentifier();
 
     ID3D11RenderTargetView* nullView = nullptr;
@@ -115,6 +120,7 @@ public:
     // begin next frame
     RestoreAPIState();
     DX11::D3D::stateman->Restore();
+#endif
   }
 };
 #endif
