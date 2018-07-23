@@ -183,6 +183,11 @@ unsigned int Mixer::MixSurround(float* samples, unsigned int num_samples)
   return available_samples;
 }
 
+unsigned int Mixer::AvailableSamples() const
+{
+  return std::min(m_dma_mixer.AvailableSamples(), m_streaming_mixer.AvailableSamples());
+}
+
 void Mixer::MixerFifo::PushSamples(const short* samples, unsigned int num_samples)
 {
   // Cache access in non-volatile variable
