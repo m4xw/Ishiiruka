@@ -179,12 +179,12 @@ Option<bool> DSPEnableJIT("dolphin_dsp_jit", "DSP Enable JIT", true);
 Option<PowerPC::CPUCore> cpu_core("dolphin_cpu_core", "CPU Core",
                                   {
 #ifdef _M_X86
-                                      {"JIT64", PowerPC::CPUCore::JIT64},
+                                      {"JIT64", PowerPC::CPUCore::CORE_JIT64},
 #elif _M_ARM_64
                                       {"JITARM64", PowerPC::CPUCore::JITARM64},
 #endif
-                                      {"Interpreter", PowerPC::CPUCore::Interpreter},
-                                      {"Cached Interpreter", PowerPC::CPUCore::CachedInterpreter}});
+                                      {"Interpreter", PowerPC::CPUCore::CORE_INTERPRETER},
+                                      {"Cached Interpreter", PowerPC::CPUCore::CORE_CACHEDINTERPRETER}});
 Option<DiscIO::Language> Language("dolphin_language", "Language",
                                   {{"English", DiscIO::Language::English},
                                    {"Japanese", DiscIO::Language::Japanese},
