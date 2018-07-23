@@ -87,7 +87,9 @@ static void ContextReset(void)
     DX11::D3D::context = d3d->context;
     DX11::D3D::featlevel = d3d->featureLevel;
     DX11::D3D::stateman = new DX11::D3D::StateManager;
+#if 0
     DX11::PD3DCompile = d3d->D3DCompile;
+#endif
     if (FAILED(d3d->device->QueryInterface<ID3D11Device1>(&DX11::D3D::device1)))
     {
       WARN_LOG(VIDEO, "Missing Direct3D 11.1 support. Logical operations will not be supported.");
@@ -100,9 +102,9 @@ static void ContextReset(void)
     d3d->device->CheckFormatSupport(DXGI_FORMAT_BC2_UNORM, &bc2_support);
     d3d->device->CheckFormatSupport(DXGI_FORMAT_BC7_UNORM, &bc7_support);
     d3d->device->CheckFormatSupport(DXGI_FORMAT_BC3_UNORM, &bc3_support);
+#if 0
     g_Config.backend_info.bSupportsST3CTextures =
         (bc1_support & bc2_support & bc3_support) & D3D11_FORMAT_SUPPORT_TEXTURE2D;
-#if 0
     g_Config.backend_info.bSupportsBPTCTextures = bc7_support & D3D11_FORMAT_SUPPORT_TEXTURE2D;
 #endif
   }
@@ -124,7 +126,9 @@ static void ContextDestroy(void)
     DX11::D3D::device = nullptr;
     DX11::D3D::device1 = nullptr;
     DX11::D3D::context = nullptr;
+#if 0
     DX11::PD3DCompile = nullptr;
+#endif
     delete DX11::D3D::stateman;
 #endif
     break;
