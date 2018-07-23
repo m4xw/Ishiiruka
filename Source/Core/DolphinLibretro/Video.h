@@ -10,15 +10,15 @@
 #include "VideoBackends/Vulkan/VulkanLoader.h"
 #endif
 #ifdef _WIN32
-#include "VideoBackends/D3D/D3DBase.h"
-#include "VideoBackends/D3D/D3DState.h"
-#include "VideoBackends/D3D/D3DUtil.h"
-#include "VideoBackends/D3D/DXShader.h"
-#include "VideoBackends/D3D/DXTexture.h"
-#include "VideoBackends/D3D/FramebufferManager.h"
-#include "VideoBackends/D3D/PixelShaderCache.h"
-#include "VideoBackends/D3D/Render.h"
-#include "VideoBackends/D3D/TextureCache.h"
+#include "VideoBackends/DX11/D3DBase.h"
+#include "VideoBackends/DX11/D3DState.h"
+#include "VideoBackends/DX11/D3DUtil.h"
+#include "VideoBackends/DX11/D3DShader.h"
+#include "VideoBackends/DX11/DXTexture.h"
+#include "VideoBackends/DX11/FramebufferManager.h"
+#include "VideoBackends/DX11/PixelShaderCache.h"
+#include "VideoBackends/DX11/Render.h"
+#include "VideoBackends/DX11/TextureCache.h"
 #endif
 
 namespace Libretro
