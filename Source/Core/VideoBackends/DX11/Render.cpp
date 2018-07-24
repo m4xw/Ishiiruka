@@ -48,6 +48,8 @@
 namespace DX11
 {
 
+static bool s_create_device;
+
 static Television s_television;
 
 D3D::BlendStatePtr clearblendstates[4];
@@ -249,7 +251,7 @@ void Renderer::PrepareFrameDumpBuffer(u32 width, u32 height)
   CHECK(hr == S_OK, "Create screenshot staging texture");
   D3D::SetDebugObjectName(m_frame_dump_staging_texture.get(), "staging screenshot texture");
 }
-Renderer::Renderer(void *&window_handle)
+Renderer::Renderer(void *window_handle)
 {
   D3D::Create((HWND)window_handle);
 

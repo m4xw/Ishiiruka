@@ -45,6 +45,7 @@
 
 namespace DX11
 {
+   static bool s_create_device;
 
 unsigned int VideoBackend::PeekMessages()
 {
@@ -155,8 +156,10 @@ void VideoBackend::InitBackendInfo()
 
 bool VideoBackend::Initialize(void *window_handle)
 {
-  if (window_handle == nullptr)
+  s_create_device = (D3D::device == nullptr);
+  if (s_create_device && (window_handle == nullptr))
     return false;
+
   InitBackendInfo();
   InitializeShared();
   m_window_handle = window_handle;
