@@ -24,11 +24,15 @@
 #include "Core/Core.h"
 #include "Core/Host.h"
 
+#ifndef __LIBRETRO__
 #include "DolphinWX/Debugger/DebuggerPanel.h"
+#endif
 #include "VideoCommon/IndexGenerator.h"
 #include "Common/FileUtil.h"
 #include "Common/IniFile.h"
+#ifndef __LIBRETRO__
 #include "DolphinWX/VideoConfigDiag.h"
+#endif
 
 #include "VideoBackends/DX11/BoundingBox.h"
 #include "VideoBackends/DX11/D3DUtil.h"
