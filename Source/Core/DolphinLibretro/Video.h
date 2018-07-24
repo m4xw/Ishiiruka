@@ -80,10 +80,7 @@ public:
 class DX11Renderer : public DX11::Renderer
 {
 public:
-   /* TODO/FIXME */
-#if 0
-  DX11Renderer() : DX11::Renderer(1,1) {}
-#endif
+  DX11Renderer() : DX11::Renderer((HWND)0) {}
   void SwapImpl(u32 xfbAddr, u32 fbWidth, u32 fbStride, u32 fbHeight, const EFBRectangle& rc, u64 ticks, float Gamma)
   {
      /* TODO/FIXME */

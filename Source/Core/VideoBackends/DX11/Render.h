@@ -16,7 +16,7 @@ namespace DX11
 class Renderer : public ::Renderer
 {
 public:
-  Renderer(void *&window_handle);
+  Renderer(void *window_handle);
   ~Renderer();
   void Init() override;
   void SetBlendingState(const BlendingState& state) override;
