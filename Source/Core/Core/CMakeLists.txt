@@ -322,7 +322,7 @@ if(WIN32)
     )
   endif()
   target_link_libraries(core PUBLIC
-    videod3d
+    videodx11
     setupapi.lib
     iphlpapi.lib
   )

@@ -3,7 +3,9 @@
 // Refer to the license.txt file included.
 
 #include <memory>
+#ifndef __LIBRETRO__
 #include <wx/wx.h>
+#endif
 
 #include "Common/Logging/LogManager.h"
 
