@@ -3,6 +3,8 @@ set(SRCS
   BoundingBox.h
   D3DBase.cpp
   D3DBase.h
+  D3DBlob.cpp
+  D3DBlob.h
   D3DCommandListManager.cpp
   D3DCommandListManager.h
   D3DDescriptorHeapManager.cpp
