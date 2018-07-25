@@ -1,5 +1,5 @@
 
-add_library(dolphin_libretro SHARED
+add_library(ishiiruka_libretro SHARED
   Boot.cpp
   Host.cpp
   Input.cpp
@@ -10,7 +10,7 @@ add_library(dolphin_libretro SHARED
 )
 
 if (NOT APPLE)
-   target_sources(dolphin_libretro PRIVATE
+   target_sources(ishiiruka_libretro PRIVATE
       Vulkan.cpp
    )
 endif()
@@ -20,18 +20,18 @@ include_directories(${CMAKE_SOURCE_DIR}/Externals/Vulkan/Include)
 
 set(LIBRARY_OUTPUT_PATH "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
-set_target_properties(dolphin_libretro PROPERTIES PREFIX "")
+set_target_properties(ishiiruka_libretro PROPERTIES PREFIX "")
 if(ANDROID)
-    target_sources(dolphin_libretro PRIVATE
+    target_sources(ishiiruka_libretro PRIVATE
    )
-   set_target_properties(dolphin_libretro PROPERTIES SUFFIX "_android.so")
+   set_target_properties(ishiiruka_libretro PROPERTIES SUFFIX "_android.so")
 endif()
 
 if(NOT MSVC)
    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
 endif()
 
-target_link_libraries(dolphin_libretro PRIVATE
+target_link_libraries(ishiiruka_libretro PRIVATE
   core
   uicommon
   ${LIBS}
