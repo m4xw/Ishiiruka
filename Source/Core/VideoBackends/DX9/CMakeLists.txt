@@ -25,6 +25,8 @@ set(SRCS
   TextureCache.h
   TextureConverter.cpp
   TextureConverter.h
+  ../../VideoCommon/TextureConversionShader.cpp
+  ../../VideoCommon/TextureConversionShader.h
   VertexManager.cpp
   VertexManager.h
   VertexShaderCache.cpp
@@ -37,5 +39,7 @@ set(LIBS
   SOIL
   common
 )
+
+include_directories(${CMAKE_SOURCE_DIR}/Externals/d3dx9)
 
 add_dolphin_library(videodx9 "${SRCS}" "${LIBS}")

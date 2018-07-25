@@ -10,6 +10,7 @@ set(SRCS	AsyncRequests.cpp
 			DriverDetails.cpp
 			Fifo.cpp
 			FPSCounter.cpp
+         ../Common/ThreadPool.cpp
 			FramebufferManagerBase.cpp
 			GeometryShaderGen.cpp
 			GeometryShaderManager.cpp

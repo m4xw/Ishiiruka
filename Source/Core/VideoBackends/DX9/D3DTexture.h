@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "Common/CommonTypes.h"
 #include "VideoBackends/DX9/D3DBase.h"
 
 namespace DX9
