@@ -1354,11 +1354,11 @@ void Renderer::SwapImpl(u32 xfbAddr, u32 fbWidth, u32 fbStride, u32 fbHeight,
     }
     else
     {
-      glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
+      glBindFramebuffer(GL_READ_FRAMEBUFFER, g_ogl_config.defaultFramebuffer);
       DumpFrame(flipped_trc, ticks);
     }
   }
-  glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+  glBindFramebuffer(GL_DRAW_FRAMEBUFFER, g_ogl_config.defaultFramebuffer);
   // Finish up the current frame, print some stats
 
   SetWindowSize(fbStride, fbHeight);

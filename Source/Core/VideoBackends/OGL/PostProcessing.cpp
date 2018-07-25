@@ -313,7 +313,7 @@ void OGLPostProcessingShader::Draw(PostProcessor* p,
     }
     else
     {
-      glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+      glBindFramebuffer(GL_DRAW_FRAMEBUFFER, g_ogl_config.defaultFramebuffer);
     }
 
     OGLRenderPassData* shader = reinterpret_cast<OGLRenderPassData*>(pass.shader);
@@ -522,7 +522,7 @@ void OGLPostProcessor::PostProcessEFB(const TargetRectangle& target_rect, const 
       target_rect.left, target_rect.bottom, target_rect.right, target_rect.top,
       GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
-    glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, g_ogl_config.defaultFramebuffer);
   }
 
   g_renderer->RestoreAPIState();
@@ -566,7 +566,7 @@ void OGLPostProcessor::CopyTexture(const TargetRectangle& dst_rect, uintptr_t ds
       else
       {
         // window framebuffer
-        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, g_ogl_config.defaultFramebuffer);
       }
       glBlitFramebuffer(src_rect.left, src_rect.bottom, src_rect.right, src_rect.top,
         dst_rect.left, dst_rect.bottom, dst_rect.right, dst_rect.top,
