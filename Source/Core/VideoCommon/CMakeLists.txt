@@ -76,6 +76,10 @@ set(SRCS	AsyncRequests.cpp
 			XFStructs.cpp)
 set(LIBS core png xbrz)
 
+if(WIN32)
+   set(SRCS ${SRCS} HLSLCompiler.cpp)
+endif()
+
 if(_M_X86)
 	set(SRCS ${SRCS} x64TextureDecoder.cpp VertexLoaderX64.cpp)
 else()
