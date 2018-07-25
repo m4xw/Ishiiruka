@@ -154,9 +154,9 @@ namespace Vk
 static const VkApplicationInfo* GetApplicationInfo(void)
 {
   static VkApplicationInfo app_info{VK_STRUCTURE_TYPE_APPLICATION_INFO};
-  app_info.pApplicationName = "Dolphin-Emu";
+  app_info.pApplicationName = "Ishiiruka";
   app_info.applicationVersion = 5;  // TODO: extract from Common::scm_desc_str
-  app_info.pEngineName = "Dolphin-Emu";
+  app_info.pEngineName = "Ishiiruka";
   app_info.engineVersion = 2;
   app_info.apiVersion = VK_API_VERSION_1_0;
   return &app_info;

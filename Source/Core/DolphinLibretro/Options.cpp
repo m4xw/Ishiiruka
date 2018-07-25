@@ -145,10 +145,10 @@ bool Option<T>::Updated()
   return false;
 }
 
-Option<int> efbScale("dolphin_efb_scale", "EFB Scale", 1,
+Option<int> efbScale("ishiiruka_efb_scale", "EFB Scale", 1,
                      {"x1 (640 x 528)", "x2 (1280 x 1056)", "x3 (1920 x 1584)", "x4 (2560 * 2112)",
                       "x5 (3200 x 2640)", "x6 (3840 x 3168)"});
-Option<LogTypes::LOG_LEVELS> logLevel("dolphin_log_level", "Log Level",
+Option<LogTypes::LOG_LEVELS> logLevel("ishiiruka_log_level", "Log Level",
                                       {{"Info", LogTypes::LINFO},
 #if defined(_DEBUG) || defined(DEBUGFAST)
                                        {"Debug", LogTypes::LDEBUG},
@@ -156,7 +156,7 @@ Option<LogTypes::LOG_LEVELS> logLevel("dolphin_log_level", "Log Level",
                                        {"Notice", LogTypes::LNOTICE},
                                        {"Error", LogTypes::LERROR},
                                        {"Warning", LogTypes::LWARNING}});
-Option<float> cpuClockRate("dolphin_cpu_clock_rate", "CPU Clock Rate",
+Option<float> cpuClockRate("ishiiruka_cpu_clock_rate", "CPU Clock Rate",
                            {{"100%", 1.0},
                             {"150%", 1.5},
                             {"200%", 2.0},
@@ -172,11 +172,11 @@ Option<float> cpuClockRate("dolphin_cpu_clock_rate", "CPU Clock Rate",
                             {"70%", 0.7},
                             {"80%", 0.8},
                             {"90%", 0.9}});
-Option<std::string> renderer("dolphin_renderer", "Renderer", {"Hardware", "Software", "Null"});
-Option<bool> fastmem("dolphin_fastmem", "Fastmem", true);
-Option<bool> DSPHLE("dolphin_dsp_hle", "DSP HLE", true);
-Option<bool> DSPEnableJIT("dolphin_dsp_jit", "DSP Enable JIT", true);
-Option<int> cpu_core("dolphin_cpu_core", "CPU Core",
+Option<std::string> renderer("ishiiruka_renderer", "Renderer", {"Hardware", "Software", "Null"});
+Option<bool> fastmem("ishiiruka_fastmem", "Fastmem", true);
+Option<bool> DSPHLE("ishiiruka_dsp_hle", "DSP HLE", true);
+Option<bool> DSPEnableJIT("ishiiruka_dsp_jit", "DSP Enable JIT", true);
+Option<int> cpu_core("ishiiruka_cpu_core", "CPU Core",
                                   {
 #ifdef _M_X86
                                       {"JIT64", PowerPC::CPUCore::CORE_JIT64},
@@ -185,7 +185,7 @@ Option<int> cpu_core("dolphin_cpu_core", "CPU Core",
 #endif
                                       {"Interpreter", PowerPC::CPUCore::CORE_INTERPRETER},
                                       {"Cached Interpreter", PowerPC::CPUCore::CORE_CACHEDINTERPRETER}});
-Option<DiscIO::Language> Language("dolphin_language", "Language",
+Option<DiscIO::Language> Language("ishiiruka_language", "Language",
                                   {{"English", DiscIO::Language::English},
                                    {"Japanese", DiscIO::Language::Japanese},
                                    {"German", DiscIO::Language::German},
@@ -196,17 +196,17 @@ Option<DiscIO::Language> Language("dolphin_language", "Language",
                                    {"Simplified Chinese", DiscIO::Language::SimplifiedChinese},
                                    {"Traditional Chinese", DiscIO::Language::TraditionalChinese},
                                    {"Korean", DiscIO::Language::Korean}});
-Option<bool> Widescreen("dolphin_widescreen", "Widescreen", true);
-Option<bool> WidescreenHack("dolphin_widescreen_hack", "WideScreen Hack", false);
-Option<bool> prograssiveScan("dolphin_prograssive_scan", "Progressive Scan", true);
-Option<bool> pal60("dolphin_pal60", "PAL60", true);
-Option<u32> sensorBarPosition("dolphin_sensor_bar_position", "Sensor Bar Position",
+Option<bool> Widescreen("ishiiruka_widescreen", "Widescreen", true);
+Option<bool> WidescreenHack("ishiiruka_widescreen_hack", "WideScreen Hack", false);
+Option<bool> prograssiveScan("ishiiruka_prograssive_scan", "Progressive Scan", true);
+Option<bool> pal60("ishiiruka_pal60", "PAL60", true);
+Option<u32> sensorBarPosition("ishiiruka_sensor_bar_position", "Sensor Bar Position",
                               {"Bottom", "Top"});
-Option<unsigned int> audioMixerRate("dolphin_mixer_rate", "Audio Mixer Rate",
+Option<unsigned int> audioMixerRate("ishiiruka_mixer_rate", "Audio Mixer Rate",
                                     {{"32000", 32000u}, {"48000", 48000u}});
 #if 0
 Option<ShaderCompilationMode> shaderCompilationMode(
-    "dolphin_shader_compilation_mode", "Shader Compilation Mode",
+    "ishiiruka_shader_compilation_mode", "Shader Compilation Mode",
     {{"sync UberShaders", ShaderCompilationMode::SynchronousUberShaders},
      {"sync", ShaderCompilationMode::Synchronous},
      {"a-sync UberShaders", ShaderCompilationMode::AsynchronousUberShaders},
