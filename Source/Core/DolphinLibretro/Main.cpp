@@ -295,3 +295,12 @@ void retro_cheat_reset(void)
 void retro_cheat_set(unsigned index, bool enabled, const char* code)
 {
 }
+
+bool AVIDump::Start(int w, int h, bool fromBGRA)
+{
+   return false;
+}
+
+void AVIDump::Stop() { }
+
+void AVIDump::AddFrame(const u8* data, int width, int height, int stride, const Frame& state) { }
