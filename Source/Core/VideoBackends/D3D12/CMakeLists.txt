@@ -56,4 +56,6 @@ set(LIBS
   common
 )
 
+include_directories(${CMAKE_SOURCE_DIR}/Externals/d3dx12)
+
 add_dolphin_library(videod3d12 "${SRCS}" "${LIBS}")
