@@ -142,6 +142,45 @@ Renderer::Renderer(void *&window_handle)
   s_gx_state.raster.cullmode = GenMode::CULL_NONE;
 }
 
+struct d3d_matrix
+{
+   union {
+      struct {
+         float        _11, _12, _13, _14;
+         float        _21, _22, _23, _24;
+         float        _31, _32, _33, _34;
+         float        _41, _42, _43, _44;
+
+      };
+      float m[4][4];
+   };
+};
+
+void *d3d_matrix_identity(void *_pout)
+{
+   struct d3d_matrix *pout = (struct d3d_matrix*)_pout;
+   if ( !pout )
+      return NULL;
+
+   pout->m[0][1] = 0.0f;
+   pout->m[0][2] = 0.0f;
+   pout->m[0][3] = 0.0f;
+   pout->m[1][0] = 0.0f;
+   pout->m[1][2] = 0.0f;
+   pout->m[1][3] = 0.0f;
+   pout->m[2][0] = 0.0f;
+   pout->m[2][1] = 0.0f;
+   pout->m[2][3] = 0.0f;
+   pout->m[3][0] = 0.0f;
+   pout->m[3][1] = 0.0f;
+   pout->m[3][2] = 0.0f;
+   pout->m[0][0] = 1.0f;
+   pout->m[1][1] = 1.0f;
+   pout->m[2][2] = 1.0f;
+   pout->m[3][3] = 1.0f;
+   return pout;
+}
+
 void Renderer::Init()
 {
   m_IS_AMD = D3D::IsATIDevice();
@@ -163,10 +202,11 @@ void Renderer::Init()
 
   // We're not using fixed function.
   // Let's just set the matrices to identity to be sure.
-  D3DXMATRIX mtx;
-  D3DXMatrixIdentity(&mtx);
-  D3D::dev->SetTransform(D3DTS_VIEW, &mtx);
-  D3D::dev->SetTransform(D3DTS_WORLD, &mtx);
+  struct d3d_matrix mtx;
+
+  d3d_matrix_identity(&mtx);
+  D3D::dev->SetTransform(D3DTS_VIEW, (D3DMATRIX*)&mtx);
+  D3D::dev->SetTransform(D3DTS_WORLD, (D3DMATRIX*)&mtx);
 
   SetupDeviceObjects();
 
