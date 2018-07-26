@@ -91,13 +91,12 @@ bool retro_load_game(const struct retro_game_info* game)
   SConfig::GetInstance().m_audio_stretch = false;
 
   Config::SetBase(Config::SYSCONF_LANGUAGE, (u32)(DiscIO::Language)Libretro::Options::Language);
+  Config::SetBase(Config::SYSCONF_WIDESCREEN, (bool)Libretro::Options::Widescreen);
+  Config::SetBase(Config::SYSCONF_PROGRESSIVE_SCAN, (bool)Libretro::Options::progressiveScan);
+  Config::SetBase(Config::SYSCONF_PAL60, (bool)Libretro::Options::pal60);
+  Config::SetBase(Config::SYSCONF_SENSOR_BAR_POSITION, (u32)Libretro::Options::sensorBarPosition);
+  Config::SetBase(Config::GFX_WIDESCREEN_HACK, (bool)Libretro::Options::WidescreenHack);
 #if 0
-  Config::SetBase(Config::SYSCONF_WIDESCREEN, Libretro::Options::Widescreen);
-  Config::SetBase(Config::SYSCONF_PROGRESSIVE_SCAN, Libretro::Options::prograssiveScan);
-  Config::SetBase(Config::SYSCONF_PAL60, Libretro::Options::pal60);
-  Config::SetBase(Config::SYSCONF_SENSOR_BAR_POSITION, Libretro::Options::sensorBarPosition);
-
-  Config::SetBase(Config::GFX_WIDESCREEN_HACK, Libretro::Options::WidescreenHack);
   Config::SetBase(Config::GFX_ASPECT_RATIO, AspectMode::Stretch);
 #endif
   Config::SetBase(Config::GFX_EFB_SCALE, (int)Libretro::Options::efbScale);

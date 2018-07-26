@@ -198,7 +198,7 @@ Option<DiscIO::Language> Language("ishiiruka_language", "Language",
                                    {"Korean", DiscIO::Language::Korean}});
 Option<bool> Widescreen("ishiiruka_widescreen", "Widescreen", true);
 Option<bool> WidescreenHack("ishiiruka_widescreen_hack", "WideScreen Hack", false);
-Option<bool> prograssiveScan("ishiiruka_prograssive_scan", "Progressive Scan", true);
+Option<bool> progressiveScan("ishiiruka_progressive_scan", "Progressive Scan", true);
 Option<bool> pal60("ishiiruka_pal60", "PAL60", true);
 Option<u32> sensorBarPosition("ishiiruka_sensor_bar_position", "Sensor Bar Position",
                               {"Bottom", "Top"});
