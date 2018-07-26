@@ -29,7 +29,7 @@ public:
 
   bool Updated();
 
-  operator T()
+  operator const T&()
   {
     Updated();
     return m_value;

@@ -77,7 +77,7 @@ void Set(LayerType layer, const ConfigInfo<T>& info, const T& value)
 }
 
 template <typename T>
-void SetBase(const ConfigInfo<T>& info, const T& value)
+void SetBase(const ConfigInfo<T>& info, const T value)
 {
   Set<T>(LayerType::Base, info, value);
 }

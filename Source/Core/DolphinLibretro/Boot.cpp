@@ -98,9 +98,9 @@ bool retro_load_game(const struct retro_game_info* game)
   Config::SetBase(Config::SYSCONF_SENSOR_BAR_POSITION, Libretro::Options::sensorBarPosition);
 
   Config::SetBase(Config::GFX_WIDESCREEN_HACK, Libretro::Options::WidescreenHack);
-  Config::SetBase(Config::GFX_EFB_SCALE, Libretro::Options::efbScale);
   Config::SetBase(Config::GFX_ASPECT_RATIO, AspectMode::Stretch);
 #endif
+  Config::SetBase(Config::GFX_EFB_SCALE, (int)Libretro::Options::efbScale);
   Config::SetBase(Config::GFX_BACKEND_MULTITHREADING, false);
 #if 0
   Config::SetBase(Config::GFX_SHADER_COMPILER_THREADS, 1);
