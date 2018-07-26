@@ -110,7 +110,10 @@ static void ContextReset(void)
   }
 #endif
 
-  g_video_backend->Initialize(nullptr);
+  if (Core::GetState() != Core::State::Uninitialized)
+     g_video_backend->Video_Prepare();
+  else
+     g_video_backend->Initialize(nullptr);
   g_video_backend->CheckInvalidState();
 }
 
@@ -118,7 +121,7 @@ static void ContextDestroy(void)
 {
   DEBUG_LOG(VIDEO, "Context destroy!\n");
 
-  g_video_backend->Shutdown();
+  g_video_backend->Video_Cleanup();
   switch (hw_render.context_type)
   {
   case RETRO_HW_CONTEXT_DIRECT3D:
