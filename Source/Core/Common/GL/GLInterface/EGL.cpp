@@ -48,7 +48,7 @@ void cInterfaceEGL::DetectMode()
 {
   if (s_opengl_mode != GLInterfaceMode::MODE_DETECT)
     return;
-  bool preferGLES = Config::Get(Config::GFX_PREFER_GLES);
+  bool preferGLES = false;
 
   EGLint num_configs;
   bool supportsGL = false, supportsGLES2 = false, supportsGLES3 = false;
