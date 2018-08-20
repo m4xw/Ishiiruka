@@ -27,7 +27,11 @@ if(ANDROID)
    set_target_properties(ishiiruka_libretro PROPERTIES SUFFIX "_android.so")
 endif()
 
-if(NOT MSVC)
+if(CMAKE_C_COMPILER_ID MATCHES "Clang")
+   set(CLANG 1)
+endif()
+
+if(NOT MSVC AND NOT CLANG)
    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
 endif()
 
