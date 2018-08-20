@@ -151,7 +151,7 @@ if(OPROFILE_FOUND)
   target_link_libraries(common PRIVATE ${OPROFILE_LIBRARIES})
 endif()
 
-if(UNIX)
+if(UNIX AND NOT LIBRETRO)
   # Posix networking code needs to be fixed for Windows
   add_executable(traversal_server TraversalServer.cpp)
   if(SYSTEMD_FOUND)
