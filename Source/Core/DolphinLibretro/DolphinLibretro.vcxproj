@@ -12,7 +12,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8DCFA10F-2CAC-45A6-88A1-6B0D24C27EE9}</ProjectGuid>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
     <ProjectName>Libretro</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -54,6 +54,7 @@
     <ClInclude Include="libretro_vulkan.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Options.h" />
+    <ClInclude Include="RetroGLContext.h" />
     <ClInclude Include="Video.h" />
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +64,7 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Options.cpp" />
+    <ClCompile Include="RetroGLContext.cpp" />
     <ClCompile Include="Video.cpp" />
     <ClCompile Include="Vulkan.cpp" />
   </ItemGroup>
@@ -103,7 +105,7 @@
     <ProjectReference Include="$(CoreDir)InputCommon\InputCommon.vcxproj">
       <Project>{6bbd47cf-91fd-4077-b676-8b76980178a9}</Project>
     </ProjectReference>
-    <ProjectReference Include="$(CoreDir)VideoBackends\DX11\DX11.vcxproj">
+    <ProjectReference Include="$(CoreDir)VideoBackends\D3D\D3D.vcxproj">
       <Project>{96020103-4ba5-4fd2-b4aa-5b6d24492d4e}</Project>
     </ProjectReference>
     <ProjectReference Include="$(CoreDir)VideoBackends\OGL\OGL.vcxproj">

@@ -3,6 +3,7 @@
 #include "Common/Logging/LogManager.h"
 #include "DolphinLibretro/Log.h"
 #include "DolphinLibretro/Options.h"
+#include <libretro.h>
 
 namespace Libretro
 {

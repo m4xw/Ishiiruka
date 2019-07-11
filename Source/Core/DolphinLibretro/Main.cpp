@@ -14,15 +14,19 @@
 #include "Core/BootManager.h"
 #include "Core/Config/SYSCONFSettings.h"
 #include "Core/Core.h"
+#include "Core/ConfigManager.h"
 #include "Core/HW/CPU.h"
+#include "Core/HW/Memmap.h"
 #include "Core/HW/ProcessorInterface.h"
 #include "Core/HW/VideoInterface.h"
+#include "Core/HW/WiimoteReal/WiimoteReal.h"
 #include "Core/State.h"
 #include "DolphinLibretro/Input.h"
 #include "DolphinLibretro/Options.h"
 #include "DolphinLibretro/Video.h"
 #include "VideoBackends/OGL/FramebufferManager.h"
 #include "VideoBackends/OGL/Render.h"
+#include "VideoBackends/Software/SWOGLWindow.h"
 #include "VideoCommon/AsyncRequests.h"
 #include "VideoCommon/Fifo.h"
 #include "VideoCommon/VideoConfig.h"
@@ -72,7 +76,7 @@ class Stream final : public SoundStream
 {
 public:
   Stream() : SoundStream(GetSampleRate()) {}
-  bool SetRunning(bool running) override { return running; }
+  bool SetRunning(bool running) override { return true; }
   void Update() override
   {
     unsigned int available = m_mixer->AvailableSamples();
@@ -111,7 +115,7 @@ void retro_set_environment(retro_environment_t cb)
   Libretro::environ_cb = cb;
   Libretro::Options::SetVariables();
 #ifdef PERF_TEST
-  environ_cb(RETRO_ENVIRONMENT_GET_PERF_INTERFACE, &perf_cb);
+  Libretro::environ_cb(RETRO_ENVIRONMENT_GET_PERF_INTERFACE, &perf_cb);
 #endif
 }
 
@@ -172,7 +176,7 @@ void retro_run(void)
 
   if (Core::GetState() == Core::State::Uninitialized)
   {
-    Core::EmuThread();
+    Core::EmuThread(Libretro::Video::wsi);
     AudioCommon::SetSoundStreamRunning(false);
     g_sound_stream.reset();
     g_sound_stream = std::make_unique<Libretro::Audio::Stream>();
@@ -182,7 +186,13 @@ void retro_run(void)
     {
       g_renderer->Shutdown();
       g_renderer.reset();
-      g_renderer = std::make_unique<Libretro::Video::SWRenderer>();
+      g_renderer = std::make_unique<SWRenderer>(SWOGLWindow::Create(Libretro::Video::wsi));
+    }
+    else if (SConfig::GetInstance().m_strVideoBackend == "Null")
+    {
+      g_renderer->Shutdown();
+      g_renderer.reset();
+      g_renderer = std::make_unique<Libretro::Video::NullRenderer>();
     }
 #ifdef _WIN32
     else if (SConfig::GetInstance().m_strVideoBackend == "D3D")
@@ -196,7 +206,8 @@ void retro_run(void)
       Common::SleepCurrentThread(100);
   }
 
-  if (SConfig::GetInstance().m_strVideoBackend == "OGL")
+  if (SConfig::GetInstance().m_strVideoBackend == "OGL"
+		  || SConfig::GetInstance().m_strVideoBackend == "Software Renderer")
   {
     OGL::g_ogl_config.defaultFramebuffer =
         (GLuint)Libretro::Video::hw_render.get_current_framebuffer();
@@ -220,6 +231,19 @@ void retro_run(void)
     retro_system_av_info info;
     retro_get_system_av_info(&info);
     Libretro::environ_cb(RETRO_ENVIRONMENT_SET_GEOMETRY, &info);
+  }
+
+  if (Libretro::Options::irMode.Updated() || Libretro::Options::irCenter.Updated()
+      || Libretro::Options::irWidth.Updated() || Libretro::Options::irHeight.Updated())
+  {
+    Libretro::Input::ResetControllers();
+  }
+
+  if (Libretro::Options::bluetoothContinuousScan.Updated()
+      && Libretro::Options::bluetoothContinuousScan != SConfig::GetInstance().m_WiimoteContinuousScanning)
+  {
+    SConfig::GetInstance().m_WiimoteContinuousScanning = Libretro::Options::bluetoothContinuousScan;
+    WiimoteReal::Initialize(Wiimote::InitializeMode::DO_NOT_WAIT_FOR_WIIMOTES);
   }
 
   RETRO_PERFORMANCE_INIT(dolphin_main_func);
@@ -280,11 +304,17 @@ unsigned retro_api_version()
 
 size_t retro_get_memory_size(unsigned id)
 {
+  if ( id == RETRO_MEMORY_SYSTEM_RAM ) {
+    return Memory::m_TotalMemorySize;
+  }
   return 0;
 }
 
 void* retro_get_memory_data(unsigned id)
 {
+  if ( id == RETRO_MEMORY_SYSTEM_RAM ) {
+	return Memory::m_pContiguousRAM;
+  }
   return NULL;
 }
 
@@ -295,12 +325,3 @@ void retro_cheat_reset(void)
 void retro_cheat_set(unsigned index, bool enabled, const char* code)
 {
 }
-
-bool AVIDump::Start(int w, int h, bool fromBGRA)
-{
-   return false;
-}
-
-void AVIDump::Stop() { }
-
-void AVIDump::AddFrame(const u8* data, int width, int height, int stride, const Frame& state) { }

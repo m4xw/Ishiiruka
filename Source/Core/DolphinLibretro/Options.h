@@ -29,7 +29,7 @@ public:
 
   bool Updated();
 
-  operator const T&()
+  operator T()
   {
     Updated();
     return m_value;
@@ -58,6 +58,10 @@ private:
   std::vector<std::pair<std::string, T>> m_list;
 };
 
+extern Option<int> irMode;
+extern Option<int> irCenter;
+extern Option<int> irWidth;
+extern Option<int> irHeight;
 extern Option<int> efbScale;
 extern Option<LogTypes::LOG_LEVELS> logLevel;
 extern Option<float> cpuClockRate;
@@ -65,7 +69,7 @@ extern Option<std::string> renderer;
 extern Option<bool> fastmem;
 extern Option<bool> DSPHLE;
 extern Option<bool> DSPEnableJIT;
-extern Option<int> cpu_core;
+extern Option<PowerPC::CPUCore> cpu_core;
 extern Option<DiscIO::Language> Language;
 extern Option<bool> Widescreen;
 extern Option<bool> WidescreenHack;
@@ -73,6 +77,18 @@ extern Option<bool> progressiveScan;
 extern Option<bool> pal60;
 extern Option<u32> sensorBarPosition;
 extern Option<unsigned int> audioMixerRate;
-//extern Option<ShaderCompilationMode> shaderCompilationMode;
+extern Option<ShaderCompilationMode> shaderCompilationMode;
+extern Option<int> maxAnisotropy;
+extern Option<bool> efbScaledCopy;
+extern Option<bool> efbToTexture;
+extern Option<bool> efbToVram;
+extern Option<bool> bboxEnabled;
+extern Option<bool> gpuTextureDecoding;
+extern Option<bool> waitForShaders;
+extern Option<bool> forceTextureFiltering;
+extern Option<bool> loadCustomTextures;
+extern Option<bool> bluetoothContinuousScan;
+extern Option<bool> cheatsEnabled;
+extern Option<int> textureCacheAccuracy;
 }  // namespace Options
 }  // namespace Libretro

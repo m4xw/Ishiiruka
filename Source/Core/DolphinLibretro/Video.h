@@ -2,7 +2,6 @@
 #pragma once
 
 #include <libretro.h>
-//#include "VideoBackends/Null/Render.h"
 #include "VideoBackends/Software/SWRenderer.h"
 #include "VideoBackends/Software/SWTexture.h"
 #include "VideoCommon/VideoConfig.h"
@@ -29,6 +28,7 @@ namespace Video
 void Init(void);
 extern retro_video_refresh_t video_cb;
 extern struct retro_hw_render_callback hw_render;
+extern WindowSystemInfo wsi;
 
 #ifndef __APPLE__
 namespace Vk
@@ -44,47 +44,22 @@ void WaitForPresentation();
 }  // namespace Vk
 #endif
 
-class SWRenderer : public ::SWRenderer
-{
-public:
-  void SwapImpl(u32 xfbAddr, u32 fbWidth, u32 fbStride, u32 fbHeight, const EFBRectangle& rc, u64 ticks, float Gamma)
-  {
-     if (g_ActiveConfig.bUseXFB)
-     {
-        EfbInterface::yuv422_packed* xfb = (EfbInterface::yuv422_packed*) Memory::GetPointer(xfbAddr);
-        UpdateColorTexture(xfb, fbWidth, fbHeight);
-     }
-     else
-     {
-        EfbInterface::BypassXFB(GetCurrentColorTexture(), fbWidth, fbHeight, rc, Gamma);
-     }
-
-     video_cb(GetCurrentColorTexture(), fbWidth, fbHeight, fbWidth * 4);
-
-     UpdateActiveConfig();
-  }
-};
-
-#if 0
 class NullRenderer : public Null::Renderer
 {
 public:
-  void SwapImpl(u32 xfbAddr, u32 fbWidth, u32 fbStride, u32 fbHeight, const EFBRectangle& rc, u64 ticks, float Gamma)
+  void SwapImpl(AbstractTexture* texture, const EFBRectangle& rc, u64 ticks) override
   {
     video_cb(NULL, 512, 512, 512 * 4);
     UpdateActiveConfig();
   }
 };
-#endif
 #ifdef _WIN32
 class DX11Renderer : public DX11::Renderer
 {
 public:
-  DX11Renderer() : DX11::Renderer((HWND)0) {}
-  void SwapImpl(u32 xfbAddr, u32 fbWidth, u32 fbStride, u32 fbHeight, const EFBRectangle& rc, u64 ticks, float Gamma)
+  DX11Renderer() : DX11::Renderer(1,1) {}
+  void SwapImpl(AbstractTexture* texture, const EFBRectangle& rc, u64 ticks) override
   {
-     /* TODO/FIXME */
-#if 0
     DX11::D3DTexture2D* xfb_texture = static_cast<DX11::DXTexture*>(texture)->GetRawTexIdentifier();
 
     ID3D11RenderTargetView* nullView = nullptr;
@@ -117,7 +92,6 @@ public:
     // begin next frame
     RestoreAPIState();
     DX11::D3D::stateman->Restore();
-#endif
   }
 };
 #endif

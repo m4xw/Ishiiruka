@@ -148,6 +148,14 @@ bool Option<T>::Updated()
 Option<int> efbScale("ishiiruka_efb_scale", "EFB Scale", 1,
                      {"x1 (640 x 528)", "x2 (1280 x 1056)", "x3 (1920 x 1584)", "x4 (2560 * 2112)",
                       "x5 (3200 x 2640)", "x6 (3840 x 3168)"});
+Option<int> irMode("ishiiruka_ir_mode", "Wiimote IR Mode", 1,
+                     {"Right Stick controls pointer (relative)", "Right Stick controls pointer (absolute)", "Mouse controls pointer"});
+Option<int> irCenter("ishiiruka_ir_center", "Wiimote IR Center",
+  { {"50", 50}, {"60", 60}, {"70", 70}, {"80", 80}, {"90", 90}, {"100", 100}, {"0", 0}, {"10", 10}, {"20", 20}, {"30", 30}, {"40", 40} });
+Option<int> irWidth("ishiiruka_ir_width", "Wiimote IR Width",
+  { {"50", 50}, {"60", 60}, {"70", 70}, {"80", 80}, {"90", 90}, {"100", 100}, {"0", 0}, {"10", 10}, {"20", 20}, {"30", 30}, {"40", 40} });
+Option<int> irHeight("ishiiruka_ir_height", "Wiimote IR Height",
+  { {"50", 50}, {"60", 60}, {"70", 70}, {"80", 80}, {"90", 90}, {"100", 100}, {"0", 0}, {"10", 10}, {"20", 20}, {"30", 30}, {"40", 40} });
 Option<LogTypes::LOG_LEVELS> logLevel("ishiiruka_log_level", "Log Level",
                                       {{"Info", LogTypes::LINFO},
 #if defined(_DEBUG) || defined(DEBUGFAST)
@@ -176,7 +184,7 @@ Option<std::string> renderer("ishiiruka_renderer", "Renderer", {"Hardware", "Sof
 Option<bool> fastmem("ishiiruka_fastmem", "Fastmem", true);
 Option<bool> DSPHLE("ishiiruka_dsp_hle", "DSP HLE", true);
 Option<bool> DSPEnableJIT("ishiiruka_dsp_jit", "DSP Enable JIT", true);
-Option<int> cpu_core("ishiiruka_cpu_core", "CPU Core",
+Option<PowerPC::CPUCore> cpu_core("ishiiruka_cpu_core", "CPU Core",
                                   {
 #ifdef _M_X86
                                       {"JIT64", PowerPC::CPUCore::CORE_JIT64},
@@ -202,15 +210,28 @@ Option<bool> progressiveScan("ishiiruka_progressive_scan", "Progressive Scan", t
 Option<bool> pal60("ishiiruka_pal60", "PAL60", true);
 Option<u32> sensorBarPosition("ishiiruka_sensor_bar_position", "Sensor Bar Position",
                               {"Bottom", "Top"});
+Option<bool> bluetoothContinuousScan("ishiiruka_bt_continuous_scan", "Bluetooth scan", {"Off", "Continuous"});
 Option<unsigned int> audioMixerRate("ishiiruka_mixer_rate", "Audio Mixer Rate",
                                     {{"32000", 32000u}, {"48000", 48000u}});
 #if 0
 Option<ShaderCompilationMode> shaderCompilationMode(
     "ishiiruka_shader_compilation_mode", "Shader Compilation Mode",
-    {{"sync UberShaders", ShaderCompilationMode::SynchronousUberShaders},
-     {"sync", ShaderCompilationMode::Synchronous},
-     {"a-sync UberShaders", ShaderCompilationMode::AsynchronousUberShaders},
-     {"a-sync Skip Rendering", ShaderCompilationMode::AsynchronousSkipRendering}});
+    {{"sync", ShaderCompilationMode::Synchronous},
+     {"a-sync Skip Rendering", ShaderCompilationMode::AsynchronousSkipRendering},
+     {"sync UberShaders", ShaderCompilationMode::SynchronousUberShaders},
+     {"a-sync UberShaders", ShaderCompilationMode::AsynchronousUberShaders}});
 #endif
+Option<int> maxAnisotropy("ishiiruka_max_anisotropy", "Max Anisotropy", 0, 17);
+Option<bool> efbScaledCopy("ishiiruka_efb_scaled_copy", "Scaled EFB Copy", true);
+Option<bool> efbToTexture("ishiiruka_efb_to_texture", "Store EFB Copies on GPU", true);
+Option<bool> efbToVram("ishiiruka_efb_to_vram", "Disable EFB to VRAM", false);
+Option<bool> bboxEnabled("ishiiruka_bbox_enabled", "Bounding Box Emulation", false);
+Option<bool> gpuTextureDecoding("ishiiruka_gpu_texture_decoding", "GPU Texture Decoding", false);
+Option<bool> waitForShaders("ishiiruka_wait_for_shaders", "Wait for Shaders before Starting", false);
+Option<bool> forceTextureFiltering("ishiiruka_force_texture_filtering", "Force Texture Filtering", false);
+Option<bool> loadCustomTextures("ishiiruka_load_custom_textures", "Load Custom Textures", false);
+Option<bool> cheatsEnabled("ishiiruka_cheats_enabled", "Internal Cheats Enabled", false);
+Option<int> textureCacheAccuracy("ishiiruka_texture_cache_accuracy", "Texture Cache Accuracy",
+                                 {{"Fast", 128}, {"Middle", 512}, {"Safe", 0}});
 }  // namespace Options
 }  // namespace Libretro
