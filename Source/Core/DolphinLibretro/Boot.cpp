@@ -43,16 +43,16 @@ bool retro_load_game(const struct retro_game_info* game)
   if (save_dir && *save_dir)
     user_dir = std::string(save_dir) + DIR_SEP "User";
   else if (system_dir && *system_dir)
-    user_dir = std::string(system_dir) + DIR_SEP "dolphin-emu" DIR_SEP "User";
+    user_dir = std::string(system_dir) + DIR_SEP "ishiiruka" DIR_SEP "User";
 
   if (system_dir && *system_dir)
-    sys_dir = std::string(system_dir) + DIR_SEP "dolphin-emu" DIR_SEP "Sys";
+    sys_dir = std::string(system_dir) + DIR_SEP "ishiiruka" DIR_SEP "Sys";
   else if (core_assets_dir && *core_assets_dir)
-    sys_dir = std::string(core_assets_dir) + DIR_SEP "dolphin-emu" DIR_SEP "Sys";
+    sys_dir = std::string(core_assets_dir) + DIR_SEP "ishiiruka" DIR_SEP "Sys";
   else if (save_dir && *save_dir)
     sys_dir = std::string(save_dir) + DIR_SEP "Sys";
   else
-    sys_dir = "dolphin-emu" DIR_SEP "Sys";
+    sys_dir = "ishiiruka" DIR_SEP "Sys";
 
   File::SetSysDirectory(sys_dir);
   UICommon::SetUserDirectory(user_dir);
