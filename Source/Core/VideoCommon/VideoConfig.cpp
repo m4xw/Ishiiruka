@@ -87,6 +87,7 @@ void VideoConfig::Refresh()
   bCrop = Config::Get(Config::GFX_CROP);
   bUseXFB = Config::Get(Config::GFX_USE_XFB);
   bUseRealXFB = Config::Get(Config::GFX_USE_REAL_XFB);
+  bBlackFrameInsertion = Config::Get(Config::GFX_USE_BLACK_FRAME_INSERTION);  
   iSafeTextureCache_ColorSamples = Config::Get(Config::GFX_SAFE_TEXTURE_CACHE_COLOR_SAMPLES);
   bShowFPS = Config::Get(Config::GFX_SHOW_FPS);
   bShowNetPlayPing = Config::Get(Config::GFX_SHOW_NETPLAY_PING);
@@ -99,6 +100,7 @@ void VideoConfig::Refresh()
   bHiresMaterialMaps = Config::Get(Config::GFX_HIRES_MATERIAL_MAPS);
   bHiresMaterialMapsBuild = Config::Get(Config::GFX_HIRES_MATERIAL_MAPS_BUILD);  
   bCacheHiresTextures = Config::Get(Config::GFX_CACHE_HIRES_TEXTURES);
+  bWaitForCacheHiresTextures = Config::Get(Config::GFX_WAIT_CACHE_HIRES_TEXTURES);
   bDumpEFBTarget = Config::Get(Config::GFX_DUMP_EFB_TARGET);
   bDumpFramesAsImages = Config::Get(Config::GFX_DUMP_FRAMES_AS_IMAGES);
   bFreeLook = Config::Get(Config::GFX_FREE_LOOK);

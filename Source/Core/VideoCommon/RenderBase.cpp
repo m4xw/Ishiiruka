@@ -780,12 +780,16 @@ void Renderer::Swap(u32 xfbAddr, u32 fbWidth, u32 fbStride, u32 fbHeight, const 
   // TODO: merge more generic parts into VideoCommon
   SwapImpl(xfbAddr, fbWidth, fbStride, fbHeight, rc, ticks, Gamma);
 
-  if (m_xfb_written)
+  if (m_xfb_written || (g_ActiveConfig.bUseXFB && g_ActiveConfig.bUseRealXFB))
     m_fps_counter.Update();
 
   frameCount++;
   GFX_DEBUGGER_PAUSE_AT(NEXT_FRAME, true);
-
+  if (g_ActiveConfig.bBlackFrameInsertion)
+  {
+    InsertBlackFrame();
+    frameCount++;
+  }
   // Begin new frame
   // Set default viewport and scissor, for the clear to work correctly
   // New frame

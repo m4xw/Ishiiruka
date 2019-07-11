@@ -644,6 +644,7 @@ void Renderer::SwapImpl(u32 xfb_addr, u32 fb_width, u32 fb_stride, u32 fb_height
 
   // Enable configuration changes
   UpdateActiveConfig();
+  m_post_processor->UpdateConfiguration();
   g_texture_cache->OnConfigChanged(g_ActiveConfig);
 
   SetWindowSize(fb_stride, fb_height);
@@ -732,13 +733,25 @@ void Renderer::SwapImpl(u32 xfb_addr, u32 fb_width, u32 fb_stride, u32 fb_height
   }
 }
 
+void Renderer::InsertBlackFrame()
+{
+  auto rtv = D3D::GetBackBuffer()->GetRTV();
+  D3D::current_command_list->OMSetRenderTargets(1, &rtv, FALSE, nullptr);
+  float clear_color[4] = {0.f, 0.f, 0.f, 1.f};
+  D3D::current_command_list->ClearRenderTargetView(rtv, clear_color, 0, nullptr);
+  D3D::EndFrame();
+  D3D::Present();
+  RestoreAPIState();
+  D3D::BeginFrame();
+}
+
 void Renderer::DrawFrame(const TargetRectangle& target_rc, const EFBRectangle& source_rc, u32 xfb_addr,
   const XFBSourceBase* const* xfb_sources, u32 xfb_count, D3DTexture2D* dst_texture, const TargetSize& dst_size, u32 fb_width,
   u32 fb_stride, u32 fb_height, float Gamma)
 {
   if (g_ActiveConfig.bUseXFB)
   {
-    if (g_ActiveConfig.bUseRealXFB)
+    if (xfb_count == 0 || (xfb_count > 0 && xfb_sources[0]->real))
       DrawRealXFB(target_rc, xfb_sources, xfb_count, dst_texture, dst_size, fb_width, fb_stride, fb_height);
     else
       DrawVirtualXFB(target_rc, xfb_addr, xfb_sources, xfb_count, dst_texture, dst_size, fb_width, fb_stride, fb_height, Gamma);

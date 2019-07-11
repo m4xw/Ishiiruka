@@ -648,6 +648,7 @@ void Renderer::SwapImpl(u32 xfbAddr, u32 fbWidth, u32 fbStride, u32 fbHeight, co
 
   // Enable configuration changes
   UpdateActiveConfig();
+  m_post_processor->UpdateConfiguration();
   g_texture_cache->OnConfigChanged(g_ActiveConfig);
 
   SetWindowSize(fbStride, fbHeight);
@@ -722,6 +723,20 @@ void Renderer::SwapImpl(u32 xfbAddr, u32 fbWidth, u32 fbStride, u32 fbHeight, co
   // if the configuration has changed, reload post processor (can fail, which will deactivate it)
   if (m_post_processor->RequiresReload() || hpchanged)
     m_post_processor->ReloadShaders();
+}
+
+void Renderer::InsertBlackFrame()
+{
+  ResetAPIState();
+  D3D::context->OMSetRenderTargets(1, &D3D::GetBackBuffer()->GetRTV(), nullptr);
+  float ClearColor[4] = {0.f, 0.f, 0.f, 1.f};
+  D3D::context->ClearRenderTargetView(D3D::GetBackBuffer()->GetRTV(), ClearColor);
+  D3D::EndFrame();
+  D3D::Present();
+  D3D::BeginFrame();
+  D3D::context->OMSetRenderTargets(1, &FramebufferManager::GetEFBColorTexture()->GetRTV(),
+                                   FramebufferManager::GetEFBDepthTexture()->GetDSV());
+  Renderer::RestoreAPIState();
 }
 
 // ALWAYS call RestoreAPIState for each ResetAPIState call you're doing
@@ -854,7 +869,7 @@ void Renderer::DrawFrame(const TargetRectangle& target_rc, const EFBRectangle& s
 {
   if (g_ActiveConfig.bUseXFB)
   {
-    if (g_ActiveConfig.bUseRealXFB)
+    if (xfb_count == 0 || (xfb_count > 0 && xfb_sources[0]->real))
       DrawRealXFB(target_rc, xfb_addr, dst_texture, dst_size, fb_width, fb_stride, fb_height);
     else
       DrawVirtualXFB(target_rc, xfb_addr, xfb_sources, xfb_count, dst_texture, dst_size, fb_width, fb_stride, fb_height, Gamma);

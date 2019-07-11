@@ -117,7 +117,7 @@ struct VideoConfig final
   bool bCrop;   // Aspect ratio controls.
   bool bUseXFB;
   bool bUseRealXFB;
-
+  bool bBlackFrameInsertion;
   // OpenCL/OpenMP
   bool bEnableOpenCL;
   bool bOMPDecoder;
@@ -168,6 +168,7 @@ struct VideoConfig final
   bool bHiresMaterialMaps;
   bool bHiresMaterialMapsBuild;
   bool bCacheHiresTextures;
+  bool bWaitForCacheHiresTextures;
   bool bDumpEFBTarget;
   bool bDumpFramesAsImages;
   bool bUseFFV1;
